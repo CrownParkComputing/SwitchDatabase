@@ -1,0 +1,149 @@
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  padding: 2rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 1800px; /* Increased from 1200px to 1800px (50% wider) */
+}
+
+.threeColumnLayout {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+}
+
+.leftColumn, .middleColumn, .rightColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.description {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.switchImage {
+  width: 100%;
+  max-width: 450px; /* Increased from 300px to 450px (50% wider) */
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.card {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.button:hover {
+  background-color: #0051a2;
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.stageTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  table-layout: fixed;
+}
+
+.stageTable th, .stageTable td {
+  border: 1px solid #eaeaea;
+  padding: 0.5rem;
+  text-align: left;
+  white-space: wrap;
+}
+
+.stageTable th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.logWindow {
+  width: 100%;
+  height: 200px;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  margin-top: 2rem;
+  border: 1px solid #ccc;
+}
+
+.logWindow h2 {
+  margin-top: 0;
+}
+
+.logWindow pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.titleBar {
+  width: 100%;
+  background-color: #0070f3;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
