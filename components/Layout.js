@@ -31,13 +31,15 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Claude-SwitchManager</title>
+        <title>{isLoggedIn ? 'Logged In | ' : ''}Claude-SwitchManager</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="min-h-screen flex flex-col">
         <header className="bg-gray-800 text-white p-4">
           <div className="container mx-auto flex justify-between items-center">
-            <h1 className="text-3xl font-bold text-red-500">Claude-SwitchManager</h1>
+            <h1 className="text-3xl font-bold text-red-500">
+              Claude-SwitchManager {isLoggedIn ? '(Logged In)' : ''}
+            </h1>
             <nav>
               <ul className="flex space-x-4">
                 <li><Link href="/" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</Link></li>

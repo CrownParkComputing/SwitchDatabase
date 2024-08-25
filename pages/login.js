@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 
@@ -26,6 +26,8 @@ export default function Login() {
       if (res.ok) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.userId);
+        // Force a re-render of the Layout component
+        window.dispatchEvent(new Event('storage'));
         router.push('/portfolio');
       } else {
         setError(data.message || 'An error occurred during login.');
