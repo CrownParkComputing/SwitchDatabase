@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from '../styles/Grid.module.css';
 import { useFilterContext } from '../context/FilterContext';
 
-export default function GameGrid() {
+export default function GameGrid({ isLoggedIn }) {
   const { filters, setFilters } = useFilterContext();
   const [games, setGames] = useState([]);
   const [years, setYears] = useState([]);
@@ -56,6 +56,29 @@ export default function GameGrid() {
   const handleSearch = (e) => {
     e.preventDefault();
     fetchGames();
+  };
+
+  const handleAddToPortfolio = async (gameId) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/portfolio', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ gameId })
+      });
+      const data = await response.json();
+      if (data.success) {
+        alert('Game added to portfolio successfully!');
+      } else {
+        alert('Failed to add game to portfolio. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error adding game to portfolio:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   const months = [
@@ -137,6 +160,15 @@ export default function GameGrid() {
               <Link href={`/game/${game.id}`}>
                 <button className={styles.viewDetailsButton}>View Details</button>
               </Link>
+              {isLoggedIn && (
+                <button
+                  onClick={() => handleAddToPortfolio(game.id)}
+                  className={styles.addToPortfolioButton}
+                  style={{ marginTop: '10px', padding: '5px 10px', borderRadius: '4px', border: 'none', backgroundColor: '#28a745', color: 'white', cursor: 'pointer' }}
+                >
+                  Add to Portfolio
+                </button>
+              )}
             </div>
           ))}
         </div>

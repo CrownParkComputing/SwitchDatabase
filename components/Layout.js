@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const Layout = ({ children }) => {
   const [userIp, setUserIp] = useState('Loading...');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     fetch('/api/get-ip')
@@ -13,7 +16,17 @@ const Layout = ({ children }) => {
         console.error('Failed to fetch IP:', err);
         setUserIp('Failed to load IP');
       });
+
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    setIsLoggedIn(false);
+    router.push('/');
+  };
 
   return (
     <>
@@ -29,6 +42,17 @@ const Layout = ({ children }) => {
               <ul className="flex space-x-4">
                 <li><Link href="/" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</Link></li>
                 <li><Link href="/games" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Games</Link></li>
+                {isLoggedIn ? (
+                  <>
+                    <li><Link href="/portfolio" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Portfolio</Link></li>
+                    <li><button onClick={handleLogout} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</button></li>
+                  </>
+                ) : (
+                  <>
+                    <li><Link href="/login" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Login</Link></li>
+                    <li><Link href="/signup" className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Sign Up</Link></li>
+                  </>
+                )}
               </ul>
             </nav>
           </div>
