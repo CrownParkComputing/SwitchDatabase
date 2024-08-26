@@ -8,6 +8,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
+  if (!process.env.JWT_SECRET) {
+    console.error('JWT_SECRET is not set in environment variables');
+    return res.status(500).json({ message: 'Server configuration error' });
+  }
+
   await dbConnect();
 
   const { email, password } = req.body;
@@ -34,6 +39,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ token, userId: user._id });
   } catch (error) {
+    console.error('Login error:', error);
     res.status(500).json({ message: 'Error logging in', error: error.message });
   }
 }

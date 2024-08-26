@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+  import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'Please provide a password'],
   },
   portfolio: [{
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'Game'
   }]
 });

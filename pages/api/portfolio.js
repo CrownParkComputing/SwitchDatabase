@@ -1,4 +1,4 @@
-import dbConnect from '../../lib/dbConnect';
+    import dbConnect from '../../lib/dbConnect';
 import User from '../../models/User';
 import Game from '../../models/Game';
 import jwt from 'jsonwebtoken';
@@ -32,6 +32,7 @@ export default async function handler(req, res) {
         }
         res.status(200).json(user.portfolio);
       } catch (error) {
+        console.error('GET portfolio error:', error);
         res.status(500).json({ success: false, message: 'Server error', error: error.message });
       }
       break;
@@ -47,6 +48,10 @@ export default async function handler(req, res) {
 
         const { gameId } = req.body;
         
+        if (!gameId) {
+          return res.status(400).json({ success: false, message: 'Game ID is required' });
+        }
+
         if (!user.portfolio.includes(gameId)) {
           user.portfolio.push(gameId);
           await user.save();
@@ -54,6 +59,7 @@ export default async function handler(req, res) {
         
         res.status(200).json({ success: true, message: 'Game added to portfolio' });
       } catch (error) {
+        console.error('POST portfolio error:', error);
         res.status(500).json({ success: false, message: 'Server error', error: error.message });
       }
       break;
