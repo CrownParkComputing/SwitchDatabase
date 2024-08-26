@@ -1,4 +1,4 @@
-  import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -15,10 +15,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a password'],
   },
-  portfolio: [{
-    type: String,
-    ref: 'Game'
-  }]
+  portfolio: {
+    type: [String],
+    default: []
+  }
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

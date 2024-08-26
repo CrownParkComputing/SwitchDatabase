@@ -1,6 +1,5 @@
-    import dbConnect from '../../lib/dbConnect';
+import dbConnect from '../../lib/dbConnect';
 import User from '../../models/User';
-import Game from '../../models/Game';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
@@ -26,7 +25,7 @@ export default async function handler(req, res) {
         const userId = authenticateUser(req, res);
         if (!userId) return;
 
-        const user = await User.findById(userId).populate('portfolio');
+        const user = await User.findById(userId);
         if (!user) {
           return res.status(404).json({ success: false, message: 'User not found' });
         }
